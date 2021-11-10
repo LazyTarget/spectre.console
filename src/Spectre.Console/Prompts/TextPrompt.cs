@@ -52,6 +52,11 @@ namespace Spectre.Console
         public bool ShowChoices { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets whether it should be allowed to input values that are not defined as a choice.
+        /// </summary>
+        public bool AllowNewChoices { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether or not
         /// default values should be shown.
         /// </summary>
@@ -145,6 +150,10 @@ namespace Spectre.Console
                         if (choiceMap.TryGetValue(input, out result) && result != null)
                         {
                             return result;
+                        }
+                        else if (AllowNewChoices)
+                        {
+                            result = input;
                         }
                         else
                         {
