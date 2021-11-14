@@ -238,6 +238,7 @@ namespace Spectre.Console
         {
             var list = new List<IRenderable>();
             var highlightStyle = HighlightStyle ?? new Style(foreground: Color.Blue);
+            var createdStyle = HighlightStyle ?? new Style(foreground: Color.Orange1);
 
             if (Title != null)
             {
@@ -256,6 +257,10 @@ namespace Spectre.Console
             {
                 var current = item.Index == cursorIndex;
                 var style = current ? highlightStyle : Style.Plain;
+                if (item.Node.IsManuallyCreated)
+                {
+                    style = createdStyle;
+                }
 
                 var indent = new string(' ', item.Node.Depth * 2);
                 var prompt = item.Index == cursorIndex ? ListPromptConstants.Arrow : new string(' ', ListPromptConstants.Arrow.Length);
