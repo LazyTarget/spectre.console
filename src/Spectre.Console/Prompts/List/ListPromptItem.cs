@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Spectre.Console
 {
-    internal sealed class ListPromptItem<T> : IMultiSelectionItem<T>
+    internal sealed class ListPromptItem<T> : IMultiSelectionItem<T>, IManuallyCreatedItem
         where T : notnull
     {
         public T Data { get; }
@@ -12,6 +12,8 @@ namespace Spectre.Console
         public bool IsSelected { get; set; }
 
         public bool IsGroup => Children.Count > 0;
+
+        public bool IsManuallyCreated { get; set; }
 
         public ListPromptItem(T data, ListPromptItem<T>? parent = null)
         {

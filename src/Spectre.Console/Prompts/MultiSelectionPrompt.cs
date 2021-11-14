@@ -38,6 +38,11 @@ namespace Spectre.Console
         public Func<T, string>? Converter { get; set; }
 
         /// <summary>
+        /// Gets or sets the converter to parse the display string to the choice entity.
+        /// </summary>
+        public Func<string, T> ReverseConverter { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether or not
         /// at least one selection is required.
         /// </summary>
@@ -60,6 +65,11 @@ namespace Spectre.Console
         public SelectionMode Mode { get; set; } = SelectionMode.Leaf;
 
         internal ListPromptTree<T> Tree { get; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the user can write and submit new choices.
+        /// </summary>
+        public bool EnableCreation { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MultiSelectionPrompt{T}"/> class.
