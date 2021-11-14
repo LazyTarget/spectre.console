@@ -51,6 +51,7 @@ namespace Spectre.Console
                 _console.Cursor.Hide();
                 hook.Refresh();
 
+                string text = null;
                 while (true)
                 {
                     var rawKey = await _console.Input.ReadKeyAsync(true, cancellationToken).ConfigureAwait(false);
@@ -60,10 +61,29 @@ namespace Spectre.Console
                     }
 
                     var key = rawKey.Value;
-                    var result = _strategy.HandleInput(key, state);
+
+
+                    ListPromptInputResult result;
+                    if (Enable char.IsLetterOrDigit(key.KeyChar) || char.IsWhiteSpace(key.KeyChar))
+                    {
+                        text ??= text + key.KeyChar;
+                        result = ListPromptInputResult.Insert;
+                    }
+                    else
+                    {
+                        result = _strategy.HandleInput(key, state);
+                    }
+
                     if (result == ListPromptInputResult.Submit)
                     {
                         break;
+                    }
+
+                    if (result == ListPromptInputResult.Insert)
+                    {
+
+                        hook.Refresh();
+                        continue;
                     }
 
                     if (state.Update(key.Key) || result == ListPromptInputResult.Refresh)
