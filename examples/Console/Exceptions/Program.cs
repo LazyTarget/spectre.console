@@ -14,6 +14,11 @@ namespace Spectre.Console.Examples
             catch (Exception ex)
             {
                 AnsiConsole.WriteLine();
+                AnsiConsole.Write(new Rule("Exception.ToString()").LeftAligned());
+                AnsiConsole.WriteLine();
+                AnsiConsole.WriteLine(ex.ToString());
+
+                AnsiConsole.WriteLine();
                 AnsiConsole.Write(new Rule("Default").LeftAligned());
                 AnsiConsole.WriteLine();
                 AnsiConsole.WriteException(ex);
