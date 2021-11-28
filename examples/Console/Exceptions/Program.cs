@@ -1,5 +1,6 @@
 using System;
 using System.Security.Authentication;
+using Spectre.Console.Cli;
 
 namespace Spectre.Console.Examples
 {
@@ -47,6 +48,18 @@ namespace Spectre.Console.Examples
                         LineNumber = new Style().Foreground(Color.Cornsilk1),
                     }
                 });
+
+                AnsiConsole.WriteLine();
+                AnsiConsole.Write(new Rule("GetRenderableErrorMessage").LeftAligned());
+                AnsiConsole.WriteLine();
+                var pretty = CommandApp.GetRenderableErrorMessage(ex);
+                foreach (var renderable in pretty)
+                {
+                    if (renderable != null)
+                    {
+                        AnsiConsole.Write(renderable);
+                    }
+                }
             }
         }
 

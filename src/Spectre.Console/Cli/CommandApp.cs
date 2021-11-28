@@ -124,7 +124,7 @@ namespace Spectre.Console.Cli
             return _configurator;
         }
 
-        private static List<IRenderable?>? GetRenderableErrorMessage(Exception ex, bool convert = true)
+        public static List<IRenderable?>? GetRenderableErrorMessage(Exception ex, bool convert = true)
         {
             if (ex is CommandAppException renderable && renderable.Pretty != null)
             {
